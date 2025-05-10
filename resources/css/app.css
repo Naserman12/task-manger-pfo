@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+button:disabled{
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.hover\:bg-green-700:hover{
+    background-color: #2e7d32;
+}
+.max-h-60{
+    max-height: 15rem;
+}
+.max-h-96{
+    max-height: 18rem;
+}
