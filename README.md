@@ -8,7 +8,7 @@
 
 ## 🛠️ التقنيات المستخدمة
 
-- Laravel 10+
+- Laravel 11+
 - Livewire
 - TailwindCSS
 - Alpine.js
