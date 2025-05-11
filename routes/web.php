@@ -40,7 +40,7 @@ Route::get('/groups/{group}/delete', function (Group $group){
 })->name('groups.delete');
 
 // Main Routes
-// Route::view('/', 'welcome');
+Route::view('/', 'welcome-page')->name('/');
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

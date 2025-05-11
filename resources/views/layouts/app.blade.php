@@ -8,13 +8,13 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <script src="//unpkg.com/alpinejs" defer></script>
         @livewireStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <!-- Scripts -->
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            <livewire:layout.navigation />
             
             <!-- Page Heading -->
             @if (isset($header))
@@ -29,8 +29,10 @@
                 @yield('content')
             </main>
         </div>
-        جميع الحقوق محفوظة {{ date('Y') }} 
+        <footer class="mt-16 py-6 text-center text-sm text-gray-500 border-t">
+            جميع الحقوق محفوظة © {{ date('Y') }} ناصر فلاته
+        </footer>        
         @livewireScripts       
-        <script src="https://cdn.jsdelivr.net/npm/alpine@v3.0.2/dist/alpine.min.js" defer></script>        
+        <script src="https://cdn.jsdelivr.net/npm/alpine@v3.0.2/dist/alpine.min.js" defer></script>
     </body>
 </html>
