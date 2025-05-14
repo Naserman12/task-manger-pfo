@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('content')
+ @section('pageTitle', 'عرض المجموعات')
 <div>
     <div class="container max-auto px-4 py-8">
         @if ($groups && $groups->count() > 0)   
         <div class="felx justify-between items-center bm-8">
-            <h1 class="text-3xl font-bild text-gray-800">قائمة المجموعات</h1>
-            <a href="{{ route('groups.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg transition duration-200">إنشاء مجموعة</a>
+            <h1 class="text-3xl font-bild mb-4 text-gray-800">قائمة المجموعات</h1>
+            <a href="{{ route('groups.create') }}" class="bg-blue-500 text-white px-4 py-2  rounded-lg transition duration-200">إنشاء مجموعة</a>
         </div>
     </div>
     <!-- الرسائل -->
@@ -35,7 +36,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-medium text-gray-500" >{{$group->name}}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" >{{ $leader->name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-medium" >
-                    <a href="{{route('groups.edit', $group->id)}}" class="text-yellow-500 hover:text-yellow-900">
+                    <a href="{{route('groups.edit', $group->id)}}" class="text-yellow-500 hover:text-yellow-900 px-3 py-1 rounded">
                         تعديل </a>
                     </td>
                     <td>
@@ -43,7 +44,7 @@
                     </td>
                     <td>
                         <a href="{{ route('groups.show', $group->id) }}" 
-                            class="text-blue-500 hover:text-blue-900">
+                            class="text-blue-500 hover:text-blue-900 px-3 py-1 rounded">
                             <i class="far fa-eye"></i> عرض</a>
                     </td>
                 </tr>

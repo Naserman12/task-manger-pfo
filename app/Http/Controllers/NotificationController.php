@@ -15,7 +15,7 @@ class NotificationController extends Controller
         if ($notification->unread) {
            $notification->markAsRead();
         }
-        return view('notifications.show', compact('notification'));
+        // return view('notifications.show', compact('notification'));
     }
     public function index(){
         $user = Auth::user();

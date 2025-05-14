@@ -52,15 +52,14 @@ class GroupForm extends Component
                         Auth::user()
                     ));
                 session()->flash('message', 'تم تحديث المجموعة بنجاح');
-            }else{
-                
+            }else{ 
                 Group::create(['name' => $this->name, 'leader_id' => $this->leader_id]);  
                 session()->flash('message', ' تم إنشاء المجموعة بنجاح');
             }
             $this->resetForm();
-            return redirect()->to('/'); 
+            return redirect()->to('/groups'); 
         } catch (\Exception $e) {
-        Log::error('Save Error: '. $e->getMessage());
+            Log::error('Save Error: '. $e->getMessage());
         session('error', 'حجث خطأ'.$e->getMessage());
         }
         $this->reset(['name', 'leader_id']);
@@ -70,6 +69,7 @@ class GroupForm extends Component
         $this->reset(['name', 'leader_id']);
         $this->isEdit = false;
         $this->group_id = null;
+        return redirect()->to('/groups'); 
     }
 
     public function render()

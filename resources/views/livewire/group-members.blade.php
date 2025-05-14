@@ -1,18 +1,15 @@
 <div> 
-
-
-<div class="spaxe-y-6" x-data="{ openInviteModel: false}">
+ @section('pageTitle', 'عرض المجموعة')
+<div class="space-y-6" x-data="{ openInviteModel: false}">
     <!-- زر إضافة الأعضاء -->
      <button @click="openInviteModel = true" class="btn btn-primary px-4 py-2 bg-blue-500 text-white">
-        <i fas fa-user-plus mr-2 >دعوة اعضاء جدد</i>
+        <i class="fas fa-user-plus mr-2 ">دعوة اعضاء جدد</i>
      </button>
      <!-- قائمة الأعضاء الحالين -->
      <div class="bg-white rounded-lg shadow overflow-hidden">
-         <!-- <div class="grip grip-cols-1 md:grip-cols-2 gap-3"> -->
              <div class="divide-y divide-gray-400">
-                <h3 class="text-ms font-medium text-gray-600 mb-3">اعضاء المجموعة الحالين</h3>
+                <h3 class="text-sm font-medium text-gray-600 mb-3">اعضاء المجموعة الحالين</h3>
                 @forelse($currentMembers as $member) 
-                <!-- <div class="flex items-center justify-between bg-white p-3 rounded-lg shadow"> -->
                     <div class="px-6 py-4 flex items-center justify-between">
                         <div class="flex items-center space-x-3">
                     <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center"><span class="text-blue-600">{{ substr($member->name, 0, 1 )}}</span>  </div>
@@ -21,7 +18,7 @@
                         <p class="text-sm text-gray-500">
                             {{ $member->pivot->role === 'sub_leader' ? 'مشرف' : 'عضو' }}
                             @if ($member->pivot->status === 'pending')
-                            <span class=" ml-2 px-2 py-0 text-ms rounded-full bg-yellow-200 " >
+                            <span class=" ml-2 px-2 py-0 text-sm rounded-full bg-yellow-200 " >
                                 قيد الإنتظار
                             </span>
                             @endif
@@ -35,14 +32,33 @@
                     <i class="fas fa-paper-plane"></i>
                 </button>  
                     @endif
-                    <button wire:click="removeMember({{ $member->id }})" 
-                    class="text-red-500 hover:text-red-700">
+                    <button  wire:click="confirmDeletion({{ $member->id }})"
+    class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+                    >
                     <i class="fas fa-user-minus"></i>حذف</button>  
                 </div>
             </div>
             @empty
-            <p class="text-gray-500" >لا يوجد اعضاءفي المجموعة</p>
-            @endforelse
+            <p class="text-gray-500" >لا يوجد اعضاء في المجموعة</p>
+            @endforelse        
+    <!-- نافذة تأكيد الحذف -->
+    @if ($confirmingDelete)
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+            <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
+                <h3 class="text-gray-600 mb-4">تأكيد الحذف</h3>
+                <p class="text-gray-600">هل أنت متأكد أنك تريد حذف هذا العضو؟</p>
+
+                <div class="flex justify-end space-x-4 mt-4">
+                    <button wire:click="$set('confirmingDelete', false)" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700">
+                        إلغاء
+                    </button>
+                    <button wire:click="removeMember({{ $memberToDeleteId }})" class="bg-red-500 text-white px-4 py-2 rounded-md">
+                        حذف
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endif
         </div>
     </div>
      <!-- الرسائل -->
@@ -63,7 +79,7 @@
                     <div class=" absolute inset-0 bg-gray-500 opacity-75 "></div>
                 </div>
                 <div class=" inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                    <div class=" bg-white px-4 pt-5 bd-4 ms:p-6 sm:pd-4">
+                    <div class=" bg-white px-4 pt-5 bd-4 sm:p-6 sm:py-4">
                         <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">دعوة أعضاء جدد</h3>
                         <div class="space-y-4">
                             <div class="">
@@ -89,7 +105,7 @@
                         </div>
                     </div>
 
-                    <div class=" bg-gray-50 px-4 py-3 ms:px-6 ms:flex-row-reverse ">
+                    <div class=" bg-gray-50 px-4 py-3 sm:px-6 sm:flex-row-reverse ">
                         <button
                         wire:click="inviteMembers" @click="openInviteModel = false"  wire:loading.attr="disabled"
                         type="button" class=" w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
@@ -108,3 +124,20 @@
             </div>
          </div>
  </div>
+ <script>
+    window.livewire.on('showDeleteConfirmation', (userId) => {
+    if (confirm('هل أنت متأكد من أنك تريد حذف العضو؟')) {
+        Livewire.emit('removeMember', userId);  // إرسال ID المستخدم لاستدعاء دالة الحذف
+    }
+});
+</script>
+<?php
+/**
+ *  اقتراحات إضافية مستقبلية:
+*إضافة بحث عن الأعضاء لتسهيل الإدارة*.
+*عرض صور المستخدمين إن توفرت.
+
+*استخدام Livewire Events لعرض الرسائل كـ Toast بدلًا من المربعات الثابتة.
+
+*لو عندك جزء آخر من المشروع أو حابب تضيف ميزة جديدة، بلغني وساعدك فيها!
+*/

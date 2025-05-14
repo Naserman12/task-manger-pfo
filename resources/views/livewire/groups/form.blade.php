@@ -6,7 +6,6 @@
         {{ session('success') }}
     </div>
     @endif
-    @livewire('groups.group-form')
+    @livewire('group-form')
 </div>
-
 @endsection

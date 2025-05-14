@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,14 +8,13 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <script src="//unpkg.com/alpinejs" defer></script>
         @livewireStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <!-- Scripts -->
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            
+    <body class="font-sans antialiased bg-blue-900">
+        @livewire('navbar')
+        <div class="min-h-screen bg-gray-100 pt-20">    
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow">
@@ -33,6 +32,5 @@
             جميع الحقوق محفوظة © {{ date('Y') }} ناصر فلاته
         </footer>        
         @livewireScripts       
-        <script src="https://cdn.jsdelivr.net/npm/alpine@v3.0.2/dist/alpine.min.js" defer></script>
     </body>
 </html>

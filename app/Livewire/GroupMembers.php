@@ -8,6 +8,7 @@ use Livewire\Component;
 use App\Models\Group;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\GroupMembers\emit;
+use App\Notifications\MemberRemovedNotification;
 use GuzzleHttp\Psr7\Request;
 
 use function Symfony\Component\Clock\now;
@@ -17,6 +18,8 @@ class GroupMembers extends Component
     public  $groupId;
     public $group;
     public  $groupName;
+    public $confirmingDelete = false;
+    public $memberToDeleteId = null;
     public $showInviteModel = false; //للتحكم في المودل
     public $availableUsers = [];
     public $notification;
@@ -25,10 +28,10 @@ class GroupMembers extends Component
     public $search = '';
     
 
-    public function mount( $groupId = null){
+    public function mount( $groupId){
         $this->groupId = $groupId;
-        $group = Group::find($groupId);
-        $this->groupName = $group ? $group->name : 'لم يتم التعرف على اسم المجموعة';
+        $this->group = Group::find($groupId);
+        $this->groupName = $this->group ? $this->group->name : 'لم يتم التعرف على اسم المجموعة';
 
         $this->loadAvailableUsers();
     }
@@ -65,7 +68,7 @@ class GroupMembers extends Component
             $user->notify(new GroupNotification(
                 $this->group, 
                 Auth::user(),
-                ''
+                $this->eventType
             ));
         }
         session()->flash('message', 'تم اضافة الأعضاء');
@@ -75,40 +78,76 @@ class GroupMembers extends Component
     }
     // إرسال دعوة ال الاعضاء للإنضمام الى المجموعة
 
-    public function inviteMembers(){
+   public function inviteMembers(){
         $this->validate([
             'selectedUsers' => 'required|array',
-            'selectedRole' =>  'required|in:member,sub_leader',
-            'selectedUsers.*' => 'exists:users,id'
+            'selectedUsers.*' => 'exists:users,id',
+            'selectedRole' =>  'required|in:member,sub_leader'
         ]);
-        foreach($this->selectedUsers as $userId){
-            // إرسال الدعوة
-            $user = User::find($userId);
+            // تحقق أن groupId و groupName موجودين
+        if (!$this->groupId || !$this->groupName) {
+            session()->flash('error', 'بيانات المجموعة غير مكتملة. لا يمكن إرسال الدعوات.');
+            return;
+        }
+         foreach ($this->selectedUsers as $userId) {
+            $user = User::find($userId); // هنا userId هو ID العضو المُدعو
+
             if ($user) {
+                // يتم استخدام userId تلقائيًا من خلال $user->groups() في attach
+                $user->groups()->attach($this->groupId, [
+                    'role' => $this->selectedRole ?? 'member',
+                    'status' => 'pending',
+                     'invited_by' => Auth::id(), 
+                     'invited_at' => now()->format('Y-m-d'), 
+                ]);
+                // إرسال إشعار
                 $user->notify(new GroupInvitationNotification(
                     $this->groupId,
                     $this->groupName,
-                    $this->selectedRole
+                    Auth::user()->name // اسم من قام بالدعوة
                 ));
-                  }
+                session()->flash('message', 'تم إرسال الدعوة بنجاح');
+            }else{
+                session()->flash('message', 'لم يتم إرسال الدعوة');
+            }
         }
-        session()->flash('message', 'تم إرسال الدعوة بنجاح');
     }
-    public function removeMember ($userId){
-        try {
+    public function confirmDeletion($memberId)
+    {
+                $this->confirmingDelete = true;
+                $this->memberToDeleteId = $memberId;
+       // إظهار رسالة التأكيد باستخدام emit
+        $this->dispatch('showDeleteConfirmation', $memberId);
+    }
+ public function removeMember($userId)
+{
+    try {
+        // تحقق من أن العضو موجود
+        $user = User::find($userId);
+        if ($user) {
+            // حذف العضو من المجموعة
             $this->group->members()->detach($userId);
-            $this->dispatch('memberUpdated');
-            $user = User::find($userId);
-            $user->notify(new GroupNotification(
+               $this->confirmingDelete = false; // إغلاق نافذة التأكيد بعد الحذ
+            // إرسال الإشعار للمستخدم
+            $user->notify(new MemberRemovedNotification(
                 $this->group, 
                 'member_removed', 
                 Auth::user()
             ));
-            session()->flash('message', ' تم حذف العضو من المجموعة بنجاح');   
-        } catch (\Exception $e) {
-            session('error',  'لم يتم الحذف'.$e->getMessage());
+            // تحديث الواجهة مع رسالة نجاح
+            session()->flash('message', 'تم حذف العضو من المجموعة بنجاح');
+            // إعادة تفعيل الأحداث أو إعادة تحميل الكومبوننت
+            $this->dispatch('memberUpdated');
+        } else {
+            // في حالة العضو غير موجود
+            session()->flash('error', 'العضو غير موجود في قاعدة البيانات');
         }
+    } catch (\Exception $e) {
+        // في حالة حدوث خطأ
+        session()->flash('error', 'لم يتم الحذف: ' . $e->getMessage());
     }
+}
+
     public function render()
     {
         

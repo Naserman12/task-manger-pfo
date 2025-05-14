@@ -11,13 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('task_user', function (Blueprint $table) {
-            // $table->id();
-            $table->foreignId('task_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->timestamps();
-            $table->primary(['task_id', 'user_id']);
-        });
+       Schema::create('task_user', function (Blueprint $table) {
+    $table->unsignedBigInteger('task_id');
+    $table->unsignedBigInteger('user_id');
+    $table->timestamps();
+
+    $table->primary(['task_id', 'user_id']);
+
+    $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
+    $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+    });
+
     }
 
     /**

@@ -20,7 +20,8 @@ public function create(){
 public function edit(Group $group){
     return view('groups.form', [
         'group' => $group,
-        'users' => true
+        'users' => User::all(),
+        'isEdit' => true
     ]);
 }
 public function store(Request $request){

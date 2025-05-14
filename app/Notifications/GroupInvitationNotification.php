@@ -15,12 +15,12 @@ class GroupInvitationNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    protected $groupId,  $groupName, $role;
-    public function __construct($groupId, $groupName, $role)
+    protected $groupId,  $groupName, $inviterName;
+    public function __construct($groupId, $groupName, $inviterName)
     {
       $this->groupId = $groupId;
       $this->groupName = $groupName;
-      $this->role = $role;
+      $this->inviterName = $inviterName;
        
     }
     /**
@@ -30,24 +30,13 @@ class GroupInvitationNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database', 'mail'];
+        return ['database'];
     }
 
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
-    {
-        return (new MailMessage);
-                    // ->subject('دعوة للانضمام إلى مجموعة' . $this->group->name)
-                    // ->markdown('emails.notifications.invitation', [
-                    //     'group' => $this->group,
-                    //     'invited_by' => $this->inviter,
-                    //     'url' => route('group-members.respond')
-                    // ]);
-        
-    }
-
+  
     /**
      * Get the array representation of the notification.
      *
@@ -60,8 +49,10 @@ class GroupInvitationNotification extends Notification
             'type' => 'group_invitation',
             'group_id' => $this->groupId,
             'group_name' => $this->groupName,
-            'inviter_name' => $this->role,
-            'message' => "تمت دعوتك للانضمام إلى مجموعة : {$this->groupName} بدور {$this->role}" 
+            'inviter_name' => $this->inviterName,
+            'icon' => 'users',
+            'url' => route('notifications.show', $this->groupId),
+            'message' => "تمت دعوتك للانضمام إلى مجموعة : '{$this->groupName}' بواسطة '{$this->inviterName}'" 
         ];
     }
 }

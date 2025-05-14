@@ -25,7 +25,7 @@ class DeleteGroup extends Component
         try {
             $this->groupDelete->delete();
             session()->flash('success', 'تم حذف المجموعة');
-            return redirect()->route('groups.index');
+            return redirect()->route('groups');
         } catch (\Exception $e) {
             session()->flash('error', 'حدث خطأ اثناء الحذف'. $e->getMessage());
         }

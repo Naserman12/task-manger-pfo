@@ -6,6 +6,7 @@ use Livewire\Component;
 
 class WelcomePage extends Component
 {
+  
     public $cards = [];
 
     public function mount()

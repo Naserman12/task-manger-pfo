@@ -1,4 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    @livewire('welcome-page')
+
+@livewire('welcome-page')
+
+
 @endsection

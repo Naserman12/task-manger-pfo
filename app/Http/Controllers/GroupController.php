@@ -14,11 +14,11 @@ class GroupController extends Controller
         $group  = Group::with(['leader', 'members'])->findOrFail($id);
         return view('livewire.groups.show', compact('group'));
     }
-    function create(){
-        view('livewire.groups.create');
+    public function create(){
+       return  view('livewire.groups.create');
     }
-    function edit($group){
-        view('livewire.groups.edit', compact('group'));
+    public function edit(Group $group){
+        return view('livewire.groups.edit', compact('group'));
     }
    public function destroy(Group $group){
         try {
