@@ -13,7 +13,7 @@
         <div class="px-4 py-2 font-semibold border-b border-gray-200">
             {{ Auth::user()->name }}
         </div>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100">الملف الشخصي</a>
+        <a href="{{ route('profile.show') }}" class="block px-4 py-2 hover:bg-gray-100">الملف الشخصي</a>
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit"

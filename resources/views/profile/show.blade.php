@@ -1,18 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
+            {{ __('الملف الشخصي') }}
         </h2>
     </x-slot>
 
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+            {{-- تحديث معلومات الحساب --}}
             @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                 @livewire('profile.update-profile-information-form')
 
                 <x-section-border />
             @endif
 
+            {{-- تحديث كلمة المرور --}}
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
                 <div class="mt-10 sm:mt-0">
                     @livewire('profile.update-password-form')
@@ -21,6 +23,7 @@
                 <x-section-border />
             @endif
 
+            {{-- المصادقة الثنائية --}}
             @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
                 <div class="mt-10 sm:mt-0">
                     @livewire('profile.two-factor-authentication-form')
@@ -29,10 +32,12 @@
                 <x-section-border />
             @endif
 
+            {{-- تسجيل الخروج من المتصفحات الأخرى --}}
             <div class="mt-10 sm:mt-0">
                 @livewire('profile.logout-other-browser-sessions-form')
             </div>
 
+            {{-- حذف الحساب --}}
             @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
                 <x-section-border />
 
