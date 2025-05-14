@@ -47,7 +47,6 @@
     </div>
 </div>
 
-
 <!-- Animations -->
 <style>
     @keyframes fade-in {
