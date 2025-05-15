@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\GroupController as AdminGroupController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Livewire\Projects\Create;
+use App\Livewire\Project\IndexProjects;
 use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\ReportsController;
 use App\Http\Controllers\Admin\SettingsController;
@@ -28,7 +29,10 @@ use App\Http\Controllers\Admin\SettingsController;
 //    Route::get('/admin/projects/create', Create::class)->name('admin.projects.create');
     Route::get('/reports', ReportsIndex::class)->name('admin.reports');
     Route::get('/settings', SettingsIndex::class)->name('admin.settings');
+    Route::get('/projects', IndexProjects::class)->name('admin.projects.index');
 });
+
+
 Route::get('/projects/create-project', function () {
     return view('/livewire.project.show-create-project');
 })->name('admin.create-project');
