@@ -4,7 +4,7 @@
 <div x-data="{ open: false }"
      @click.away="open = false"
      wire:poll.60s="unreadCount"
-     class="relative">
+     class="relative  scale-y-4 ">
     
     <!-- زر الجرس -->
     <button @click="open = !open"
@@ -25,9 +25,9 @@
          x-transition:leave="transition ease-in duration-150"
          x-transition:leave-start="opacity-100 scale-100"
          x-transition:leave-end="opacity-0 scale-95"
-         class="absolute right-0 md:right-0 md:left-auto md:translate-x-0 
-           left-1/2 -translate-x-1/2 mt-2 w-80 bg-white shadow-lg rounded-md z-50"
-         style="max-height: 400px; overflow-y: auto;"
+         class="absolute right-0 md:right-0 md:left-auto md:translate-x-1
+           left-1/2 -translate-x-1/2 mt-4 w-80 bg-white shadow-lg rounded-md z-50"
+         style="max-height: 400px; overflow-y: auto; "
          >
         <!-- رأس القائمة -->
         <div class="p-4 border-b border-gray-200 flex justify-between items-center">

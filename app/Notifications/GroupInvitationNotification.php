@@ -21,7 +21,6 @@ class GroupInvitationNotification extends Notification
       $this->groupId = $groupId;
       $this->groupName = $groupName;
       $this->inviterName = $inviterName;
-       
     }
     /**
      * Get the notification's delivery channels.
@@ -42,7 +41,6 @@ class GroupInvitationNotification extends Notification
      *
      * @return array<string, mixed>
      */
-    
     public function toArray(object $notifiable): array
     {
         return [

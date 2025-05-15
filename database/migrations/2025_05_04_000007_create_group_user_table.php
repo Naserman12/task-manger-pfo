@@ -31,10 +31,7 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(): void
-    {  Schema::table('group_user', function(Blueprint $table){
-            $table->dropColumn('created_at');
-            $table->dropColumn('updated_at');
-    });
+    {  
         Schema::dropIfExists('group_user');
     }
 };
