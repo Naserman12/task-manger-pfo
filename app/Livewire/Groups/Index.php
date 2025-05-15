@@ -17,7 +17,7 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.admin.groups.index', [
+        return view('livewire.admin.groups.admin-index', [
             'groups' => $this->groups,
         ]);
     }

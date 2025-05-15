@@ -12,7 +12,7 @@ class GroupController extends Controller
       public function index()
     {
         $groups = Group::withCount('members')->get();
-        return view('livewire.admin.groups.index', compact('groups'));
+        return view('livewire.admin.groups.admin-index', compact('groups'));
     }
 
     public function edit($id)

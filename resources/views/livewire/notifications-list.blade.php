@@ -25,8 +25,7 @@
          x-transition:leave="transition ease-in duration-150"
          x-transition:leave-start="opacity-100 scale-100"
          x-transition:leave-end="opacity-0 scale-95"
-         class="absolute right-0 md:right-0 md:left-auto md:translate-x-1
-           left-1/2 -translate-x-1/2 mt-4 w-80 bg-white shadow-lg rounded-md z-50"
+         class="absolute right-0 mt-4 w-80 bg-white shadow-lg rounded-md z-50"
          style="max-height: 400px; overflow-y: auto; "
          >
         <!-- رأس القائمة -->

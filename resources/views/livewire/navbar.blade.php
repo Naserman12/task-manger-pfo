@@ -26,7 +26,7 @@
                     <!-- القائمة المنسدلة -->
                     @auth
                     <div x-show="dropdownOpen" @click.away="dropdownOpen = false" x-transition
-                        class="absolute left-0 mt-2 w-48 bg-blue-700 rounded-md shadow-lg z-50 py-2 text-right">
+                        class="absolute right-0 mt-2 w-48 bg-blue-700 rounded-md shadow-lg z-50 py-2 text-right">
                         <a href="{{ route('/') }}#home" class="block px-4 py-2 hover:bg-blue-600">الرئيسية</a>
                         <a href="{{ route('groups.index') }}#about-project" class="block px-4 py-2 hover:bg-blue-600" >المجموعات</a>
                         <a href="{{ route('/') }}#about-dev" class="block px-4 py-2 hover:bg-blue-600">عن المطور</a>
@@ -39,11 +39,13 @@
                         @endauth
                     </div>    
                 </div>
+                @if (Auth()->user()->role === 'admin')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex text-white">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('لوحة التحكم') }}
                     </x-nav-link>
                 </div>
+                @endif
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex text-white">
                     <x-nav-link :href="route('groups.index')" :active="request()->routeIs('groups.index')" wire:navigate>
                         {{ __(' عرض  المجموعات') }}

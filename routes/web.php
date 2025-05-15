@@ -27,7 +27,14 @@ use App\Http\Controllers\Admin\SettingsController;
     Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('admin.users.delete');
 //    Route::get('/admin/projects/create', Create::class)->name('admin.projects.create');
-    Route::get('/reports', ReportsIndex::class)->name('admin.reports');
+    // Route::get('/reports', ReportsIndex::class)->name('admin.reports');
+    Route::get('/reports', function () {
+    return view('livewire.admin.reports.reportsIndex');
+    })->name('admin.reports');
+    Route::get('/dashboard', function () {
+    return view('livewire.admin.dashboard.show-home');
+    })->name('admin.dashboard');
+
     Route::get('/settings', SettingsIndex::class)->name('admin.settings');
     Route::get('/projects', IndexProjects::class)->name('admin.projects.index');
 });
@@ -82,14 +89,13 @@ Route::middleware([
     Route::get('/groups/{group}/respond', [GroupMemberController::class, 'respond'])->name('group-members.respond');
 
     // Groups
-    Route::get('/groups/index', [GroupController::class, 'index'])->name('groups.index');
+    Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
     Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create');
     Route::get('/groups/{group}/edit', [GroupController::class, 'edit'])->name('groups.edit');
     Route::get('/groups/{group}', [GroupController::class, 'show'])->name('groups.show');
     Route::get('/groups/{group}/delete', function (Group $group){
         return view('/livewire/groups/delete-group', ['group' => $group]);
     })->name('groups.delete');
-
     // Dashboard
     // Route::get('/dashboard', function () {
     //     return view('dashboard');

@@ -1,6 +1,3 @@
-@extends('layouts.admin')
-@section('admin-content')
-
 <div>
     {{-- Nothing in the world is as soft and yielding as water. --}}
     <div class="p-4">
@@ -10,7 +7,6 @@
             {{ session('success') }}
         </div>
     @endif
-
     <table class="w-full border border-gray-200">
         <thead class="bg-gray-100">
             <tr>
@@ -40,6 +36,4 @@
         </tbody>
     </table>
 </div>
-
 </div>
-@endsection

@@ -19,7 +19,7 @@ class UserTableSeeder extends Seeder
         // Create Admin
         User::create([
                 'name' => 'أبو شاكر',
-                'email' => 'admin@gmail.com',
+                'email' => 'aboShakir@gmail.com',
                 'username' => 'admin',
                 'password' => Hash::make('admin123'),
                 'role' => 'admin',
@@ -37,7 +37,7 @@ class UserTableSeeder extends Seeder
         // اعضاء عاديين 
         $members = [];
 
-        for ($i=1; $i < 21 ; $i++) { 
+        for ($i=1; $i < 50 ; $i++) { 
             $members[] = [
                     'name' => 'عضو' .$i,
                     'username' => 'User' .$i,
