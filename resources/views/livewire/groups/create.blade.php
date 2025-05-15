@@ -1,8 +1,7 @@
 @if (Auth()->user()->role === 'admin')
 @extends('layouts.admin')
-@else
-@extends('layouts.app')
-@endif
-@section('content')
+@section('admin-content')
 @livewire('groups.group-form' )
 @endsection
+
+@endif

@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\Group;
 use Livewire\Component;
 use App\Models\GroupUser;
-
 class GroupMemberDashboard extends Component
 {
     public $groupId;

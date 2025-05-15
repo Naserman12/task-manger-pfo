@@ -3,8 +3,6 @@
 namespace App\Models;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Database\Eloquent\Model;
-
-
 class Group extends Model
 {
     public function notification(){
@@ -16,10 +14,8 @@ class Group extends Model
         'id',
         'user_id'
         );
-
     }
     protected $fillable = ['name', 'leader_id'];
-
     public function tasks(){
         return $this->belongsToMany(Task::class)->withTimestamps();
     }

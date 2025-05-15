@@ -69,7 +69,7 @@ class GroupForm extends Component
         $this->reset(['name', 'leader_id']);
         $this->isEdit = false;
         $this->group_id = null;
-        return redirect()->to('/groups'); 
+        return redirect()->back(); 
     }
 
     public function render()

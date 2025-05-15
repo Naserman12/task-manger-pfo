@@ -1,9 +1,4 @@
 <div class="container mx-auto p-6">
-    @if ($isEdit)
-        @section('pageTitle', 'تعديل المجموعة')
-    @else
-        @section('pageTitle', 'إضافة مجموعة')
-    @endif
     <h1 class="text-2x1 font-bold mb-6">{{ $isEdit ?  'تعديل المجموعة' : 'إنشاء مجموعة' }}</h1>
 
     @if(session()->has('message'))
@@ -11,7 +6,6 @@
             {{ session('message') }}
         </div>
     @endif
-    
     <a href="{{ route('groups.index') }}" class="bg-blue-500 text-white px-6 py-3 rounded-lg transition duration-200 mb-6 inline-block">
         عرض المجموعات
     </a>

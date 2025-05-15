@@ -26,10 +26,11 @@
             <ul class="space-y-2">
                 <li><a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 hover:bg-gray-700 rounded">الصفحة الرئيسية</a></li>
                 <li><a href="{{ route('admin.groups') }}" class="block px-4 py-2 hover:bg-gray-700 rounded">المجموعات</a></li>
-                <li><a href="{{ route('admin.create-project') }}" class="block px-4 py-2 hover:bg-gray-700 rounded">المجموعات</a></li>
+                <li><a href="{{ route('admin.create-project') }}" class="block px-4 py-2 hover:bg-gray-700 rounded">المشاريع</a></li>
                 <li><a href="{{ route('admin.users') }}" class="block px-4 py-2 hover:bg-gray-700 rounded">المستخدمين</a></li>
                 <li><a href="{{ route('admin.reports') }}" class="block px-4 py-2 hover:bg-gray-700 rounded">التقارير</a></li>
-                <li><a href="{{ route('groups.create') }}" class="block px-4 py-2 hover:bg-gray-700 rounded">الإعدادات</a></li>
+                <li><a href="{{ route('groups.create') }}" class="block px-4 py-2 hover:bg-gray-700 rounded">إنشاء مجموعة</a></li>
+                <li><a href="{{ route('/') }}" class="block px-4 py-2 hover:bg-gray-700 rounded">واجهة المستخدمين</a></li>
             </ul>
         </nav>
         <div class="mt-auto">

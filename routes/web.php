@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\SettingsController;
 
     Route::prefix('admin')->group(function () {
     Route::get('/dashboard', Home::class)->name('admin.dashboard');
-    Route::get('/groups', GroupsIndex::class)->name('admin.groups');
+    // Route::get('/groups', GroupsIndex::class)->name('admin.groups');
     Route::get('/groups/{id}/edit', [AdminGroupController::class, 'edit'])->name('admin.groups.edit'); 
     Route::delete('/groups/{id}', [AdminGroupController::class, 'destroy'])->name('admin.groups.delete'); 
     Route::get('/tasks', TasksIndex::class)->name('admin.tasks');
@@ -34,9 +34,16 @@ use App\Http\Controllers\Admin\SettingsController;
     Route::get('/dashboard', function () {
     return view('livewire.admin.dashboard.show-home');
     })->name('admin.dashboard');
+    Route::get('/groups', function () {
+    return view('livewire.admin.groups.show-admin-groups');
+    })->name('admin.groups');
 
     Route::get('/settings', SettingsIndex::class)->name('admin.settings');
     Route::get('/projects', IndexProjects::class)->name('admin.projects.index');
+});
+
+Route::get('/groups/editing', function(){
+    view('livewire.groups.show-group-form');
 });
 
 

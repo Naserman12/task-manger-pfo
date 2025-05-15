@@ -21,6 +21,10 @@ class DeleteGroup extends Component
     public function confirmDelete(){
         $this->confirmingDelete = true;
     }
+    public function cancelDelete()
+    {
+        $this->confirmingDelete = false;
+    }
     public function deleteGroup(){
         try {
             $this->groupDelete->delete();
