@@ -111,8 +111,6 @@ Route::middleware([
     // Route::get('/dashboard', function () {
     //     return view('dashboard');
     // })->name('dashboard');
-    Route::get('dashboard', function () {
-        return view('testDashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', Home::class)->name('dashboard');
 
 });

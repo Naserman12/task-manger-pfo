@@ -42,7 +42,6 @@
         <div class="p-0">
             @forelse (auth()->user()->unreadNotifications as $notification)
             <div wire:key="notification-{{ $notification->id }}"
-                wire:click="markAsRead('{{ $notification->id }}')"
                     class="p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer flex items-start">
                     
                     <div class="bg-blue-100 p-2 rounded-full mr-3">
@@ -55,7 +54,7 @@
                         <p class="text-gray-800 font-medium">{{ $notification->data['message'] }}</p>
                         <div class="flex justify-between items-center mt-1">
                             <a href="{{ route('notifications.show', $notification->id) }}"
-                               class="text-blue-600 text-sm hover:underline"
+                               class="bg-blue-500 text-white px-4 py-2  rounded-lg transition duration-200 hover:bg-blue-900"
                                @click.stop>عرض</a>
 
                                

@@ -52,7 +52,7 @@
         <div class="mt-10">
             <h2 class="text-xl font-semibold text-gray-800 mb-4">أعضاء المجموعة</h2>
             <div class="bg-white text-gray-800 p-6 rounded-lg shadow">
-                @livewire('group-members', ['groupId' => $group->id], key('member-'.$group->id))
+                @livewire('groups.group-members', ['groupId' => $group->id], key('member-'.$group->id))
             </div>
         </div>
 

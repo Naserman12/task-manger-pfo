@@ -1,4 +1,5 @@
 <div class="container mx-auto p-6">
+       {{-- The Master doesn't talk, he acts. --}}
     @if(session()->has('message'))
         <div class="alert alert-success bg-blue-500 text-white p-4 rounded-md mb-4">
             {{ session('message') }}

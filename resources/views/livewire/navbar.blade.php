@@ -1,10 +1,10 @@
 <div> 
 <div x-data="{ dropdownOpen: false, sidebarOpen: false, showNavbar: true }">
     <!-- زر إظهار/إخفاء النافبار -->
-    <div class="fixed right-2 z-50" :class="{ 'top-10': showNavbar, 'top-2': !showNavbar }">
+    <div class="fixed right-2 z-50" :class="{ 'top-14': showNavbar, 'top-2': !showNavbar }">
         <button 
             @click="showNavbar = !showNavbar"
-            class=" text-white p-1 rounded-full shadow-md text-blue-700  border-blue-700  hover:bg-blue-100 transition-all duration-300 text-sm"
+            class=" text-white p-1 rounded-full shadow-md bg-blue-100 border-blue-700  hover:bg-blue-400 transition-all duration-300 text-sm"
             aria-label="Toggle Navbar"
         >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"

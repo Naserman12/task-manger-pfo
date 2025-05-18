@@ -9,8 +9,10 @@
 </head>
 <body   x-data="{ sidebarOpen: false }" class="bg-gray-100 font-sans relative">
 
-      @livewire('navbar')
+      @include('livewire.navbar')
       <!-- يظهر فقط في الشاشات الصغيرة -->
+       <div class="">
+      
     <button @click="sidebarOpen = !sidebarOpen"
         class="md:hidden fixed top-16 right-1 z-50 p-2 text-blue-700   hover:bg-blue-100 rounded-full shadow">
         ☰
@@ -56,6 +58,9 @@
         @yield('admin-content')
     </main>
     </div>
-    @livewireScripts
+      
+       </div>
+   <script src="{{ asset('livewire/livewire.js') }}" defer></script>
+
 </body>
 </html>

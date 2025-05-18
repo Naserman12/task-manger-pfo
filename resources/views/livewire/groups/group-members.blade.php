@@ -124,6 +124,7 @@
             </div>
          </div>
  </div>
+ </div>
  <script>
     window.livewire.on('showDeleteConfirmation', (userId) => {
     if (confirm('هل أنت متأكد من أنك تريد حذف العضو؟')) {

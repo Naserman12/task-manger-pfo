@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Groups;
 use App\Models\User;
 use App\Notifications\GroupNotification;
 use App\Notifications\GroupInvitationNotification;
@@ -151,7 +151,7 @@ class GroupMembers extends Component
     public function render()
     {
         
-        return view('livewire.group-members', [
+        return view('livewire.groups.group-members', [
             'currentMembers' => $this->group->members()
                 ->withPivot(['role', 'status', 'invited_at'])->get()
         ]);
