@@ -1,6 +1,4 @@
 <div class="container mx-auto p-6">
-    <h1 class="text-2x1 font-bold mb-6">{{ $isEdit ?  'تعديل المجموعة' : 'إنشاء مجموعة' }}</h1>
-
     @if(session()->has('message'))
         <div class="alert alert-success bg-blue-500 text-white p-4 rounded-md mb-4">
             {{ session('message') }}
@@ -9,7 +7,6 @@
     <a href="{{ route('groups.index') }}" class="bg-blue-500 text-white px-6 py-3 rounded-lg transition duration-200 mb-6 inline-block">
         عرض المجموعات
     </a>
-
     <form wire:submit.prevent="saveGroup" class="bg-white p-6 rounded-lg shadow-md space-y-4">
         <div class="form-group">
             <label for="GroupName" class="text-lg font-semibold">اسم المجموعة</label>

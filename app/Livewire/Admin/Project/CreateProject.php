@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Project;
+namespace App\Livewire\Admin\Project;
 
 use Livewire\Component;
 use App\Models\Group;

@@ -5,7 +5,7 @@
     @endphp
     <!-- Main Content -->
     <div id="home" class="bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen pt-24 px-4 pb-10">
-    <div class="max-w-7xl mx-auto text-center">
+     <div class="max-w-7xl mx-auto text-center">
         <h1 class="text-4xl md:text-5xl font-extrabold text-blue-700 mb-4 animate-fade-in">نظام إدارة المهام</h1>
         <p class="text-gray-600 text-lg md:text-xl mb-10 animate-fade-in-slow">
             سهّل إدارة فريقك ومهامك اليومية بواجهة بسيطة وذكية
@@ -46,17 +46,3 @@
         @endauth
     </div>
 </div>
-
-<!-- Animations -->
-<style>
-    @keyframes fade-in {
-        0% { opacity: 0; transform: translateY(20px); }
-        100% { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-in {
-        animation: fade-in 0.6s ease-out forwards;
-    }
-    .animate-fade-in-slow {
-        animation: fade-in 1.2s ease-out forwards;
-    }
-</style>

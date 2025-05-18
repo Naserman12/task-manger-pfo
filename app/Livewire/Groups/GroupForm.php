@@ -44,34 +44,34 @@ class GroupForm extends Component
             if ($this->isEdit) {
                 $group = Group::findOrFail($this->group_id);
                 $group->update([ 'name' => $this->name, 'leader_id' => $this->leader_id]);
-               
-                
                     $group->notify(  new GroupNotification(
                         $this->group, 
                         '', 
                         Auth::user()
                     ));
-                session()->flash('message', 'تم تحديث المجموعة بنجاح');
+                session()->flash('success', 'تم تحديث المجموعة بنجاح');
+                $this->resetForm();         
             }else{ 
                 Group::create(['name' => $this->name, 'leader_id' => $this->leader_id]);  
-                session()->flash('message', ' تم إنشاء المجموعة بنجاح');
+                session()->flash('success', ' تم إنشاء المجموعة بنجاح');
+                $this->resetForm();         
             }
-            $this->resetForm();
-            return redirect()->to('/groups'); 
+            // return redirect()->to(''); 
         } catch (\Exception $e) {
             Log::error('Save Error: '. $e->getMessage());
-        session('error', 'حجث خطأ'.$e->getMessage());
+            session('error', 'حجث خطأ'.$e->getMessage());
+            $this->resetForm();         
         }
         $this->reset(['name', 'leader_id']);
         $this->groups = Group::all();
+        
     }
     public function resetForm(){
         $this->reset(['name', 'leader_id']);
         $this->isEdit = false;
-        $this->group_id = null;
-        return redirect()->back(); 
+        $this->group_id = null; 
+         return redirect()->to('/admin/groups'); 
     }
-
     public function render()
     {
         return view('livewire.groups.group-form');

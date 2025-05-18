@@ -3,5 +3,4 @@
 @section('admin-content')
 @livewire('groups.group-form' )
 @endsection
-
 @endif

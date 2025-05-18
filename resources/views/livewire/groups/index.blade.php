@@ -15,6 +15,7 @@
          {{ session('success') }} 
     </div>    
     @endif
+   
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full divide-y divide-gray-200" >
             <thead class="bg-gray-50">
@@ -38,9 +39,6 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-medium" >
                     <a href="{{route('groups.edit', $group->id)}}" class="text-yellow-500 hover:text-yellow-900 px-3 py-1 rounded">
                         تعديل </a>
-                    </td>
-                    <td>
-                      @livewire('delete-group', ['groupId' => $group->id], key('delete-'.$group->id))
                     </td>
                     <td>
                         <a href="{{ route('groups.show', $group->id) }}" 

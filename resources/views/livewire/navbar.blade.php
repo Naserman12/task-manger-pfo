@@ -4,7 +4,7 @@
     <div class="fixed right-2 z-50" :class="{ 'top-10': showNavbar, 'top-2': !showNavbar }">
         <button 
             @click="showNavbar = !showNavbar"
-            class="bg-blue-700 text-white p-1 rounded-full shadow-md hover:bg-blue-800 transition-all duration-300 text-sm"
+            class=" text-white p-1 rounded-full shadow-md text-blue-700  border-blue-700  hover:bg-blue-100 transition-all duration-300 text-sm"
             aria-label="Toggle Navbar"
         >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
@@ -14,7 +14,7 @@
         </button>
     </div>
     <!-- مثال: إظهار/إخفاء النافبار -->
-    <nav x-show="showNavbar" class="bg-blue-600 text-white shadow-md fixed w-full z-40 transition-all duration-300"
+    <nav x-show="showNavbar" class="bg-blue-600 text-white shadow-md fixed w-full z-50 transition-all duration-300"
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 -translate-y-full"
         x-transition:enter-end="opacity-100 translate-y-0"
@@ -55,21 +55,26 @@
                     @endauth
                 </div>    
             </div>
-            @if (Auth()->user()->role === 'admin')
+            
             <div class="hidden sm:flex text-white">
-                <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('dashboard')">
+                <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                     {{ __('لوحة التحكم') }}
                 </x-nav-link>
             </div>
-            @endif
+        
             <div class="hidden sm:flex text-white">
-                <x-nav-link :href="route('groups.index')" :active="request()->routeIs('groups.index')">
+                <x-nav-link :href="route('admin.groups')" :active="request()->routeIs('admin.groups')">
                     {{ __('عرض المجموعات') }}
                 </x-nav-link>
             </div>
             <div class="hidden sm:flex text-white">
-                <x-nav-link :href="route('groups.index')" :active="request()->routeIs('groups.index')">
-                    {{ __('عرض المهام') }}
+                <x-nav-link :href="route('admin.projects.index')" :active="request()->routeIs('admin.projects.index')">
+                    {{ __('عرض المشاريع') }}
+                </x-nav-link>
+            </div>
+            <div class="hidden sm:flex text-white">
+                <x-nav-link :href="route('admin.projects.index')" :active="request()->routeIs('admin.projects.index')">
+                    {{ __('عرض المشاريع') }}
                 </x-nav-link>
             </div>
         </div>

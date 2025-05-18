@@ -1,8 +1,10 @@
 @extends('layouts.admin')
 @section('admin-content')
 <div>
-    {{-- In work, do what you enjoy. --}}
-<h3 class="text-xl font-semibold">المستخدمين</h3>
+    <div class="container w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+
+        {{-- In work, do what you enjoy. --}}
+        <h3 class="text-xl font-semibold">المستخدمين</h3>
 <table class="min-w-full bg-white border border-gray-300">
     <thead>
         <tr>
@@ -26,5 +28,6 @@
         @endforeach
     </tbody>
 </table>
+</div>
 </div>
 @endsection

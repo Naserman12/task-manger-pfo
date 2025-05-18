@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('content')
+@section('admin-content')
 <!-- الرسائل -->
 @if(session('message'))
     <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mt-4">

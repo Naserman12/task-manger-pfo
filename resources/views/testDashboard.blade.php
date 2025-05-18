@@ -11,7 +11,6 @@
 <body class="bg-gray-100" x-data="{ page: 'home', open: false }">
 
     <div class="flex flex-row-reverse">
-
         <!-- Sidebar -->
         <div class="w-64 bg-gray-800 text-white h-screen">
             <div class="text-center p-6 font-bold text-2xl">إدارة المهام</div>
@@ -25,7 +24,6 @@
                 <li><a href="#" class="block px-4 py-2 hover:bg-gray-700">تسجيل الخروج</a></li>
             </ul>
         </div>
-
         <!-- Main Content -->
         <div class="flex-1 p-6">
             <header class="flex justify-between items-center mb-8">

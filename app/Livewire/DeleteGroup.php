@@ -11,8 +11,9 @@ class DeleteGroup extends Component
     public $confirmingDelete = false ;
     public  $groupDelete;
     public function mount($groupId){
-            if ($groupId) {
-                $this->groupDelete = Group::find($groupId);
+        if ($groupId) {
+            $this->groupDelete = Group::find($groupId);
+             $confirmingDelete = false ;
                 if (!$this->groupDelete) {
                     $this->emit('showAlert','المجموعة غير موجودة ' );
                 }
@@ -22,14 +23,14 @@ class DeleteGroup extends Component
         $this->confirmingDelete = true;
     }
     public function cancelDelete()
-    {
+    { 
         $this->confirmingDelete = false;
     }
     public function deleteGroup(){
         try {
             $this->groupDelete->delete();
             session()->flash('success', 'تم حذف المجموعة');
-            return redirect()->route('groups');
+            return redirect()->to('/admin/groups');
         } catch (\Exception $e) {
             session()->flash('error', 'حدث خطأ اثناء الحذف'. $e->getMessage());
         }

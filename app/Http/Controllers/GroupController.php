@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
-    function index(){
+    public function index(){
         $groups = Group::with('leader')->paginate(10);
         return view('livewire/groups.index',compact('groups'));
     }

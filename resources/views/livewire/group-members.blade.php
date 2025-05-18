@@ -41,7 +41,7 @@
             @empty
             <p class="text-gray-500" >لا يوجد اعضاء في المجموعة</p>
             @endforelse        
-    <!-- نافذة تأكيد الحذف -->
+     <!-- نافذة تأكيد الحذف -->
     @if ($confirmingDelete)
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
             <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">

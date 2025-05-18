@@ -1,0 +1,208 @@
+view/livewire/admin/projec/project-form
+<div>
+    {{-- If your happiness depends on money, you will never be happy with yourself. --}}
+    <div class="max-w-2xl mx-auto p-6 bg-white rounded shadow">
+    <h2 class="text-lg font-semibold mb-4">
+        {{ $isEdit ?   'إنشاء مشروع جديد' :'تعديل المشروع' }}
+    </h2>
+
+    @if (session()->has('success'))
+        <div class="bg-green-100 text-green-700 p-3 rounded mb-4">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <form wire:submit.prevent="save">
+        <div class="mb-4">
+            <label>اسم المشروع</label>
+            <input type="text" wire:model="name" class="w-full border p-2 rounded" />
+            @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="mb-4">
+            <label>الوصف</label>
+            <textarea wire:model="description" class="w-full border p-2 rounded"></textarea>
+            @error('description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="mb-4">
+            <label>تاريخ البدء</label>
+            <input type="date" wire:model="start_date" class="w-full border p-2 rounded" />
+            @error('start_date') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="mb-4">
+            <label>تاريخ الانتهاء</label>
+            <input type="date" wire:model="end_date" class="w-full border p-2 rounded" />
+            @error('end_date') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="mb-4">
+            <label>الحالة</label>
+            <select wire:model="status" class="w-full border p-2 rounded">
+                <option value="pending">قيد الانتظار</option>
+                <option value="in_progress">قيد التنفيذ</option>
+                <option value="completed">مكتمل</option>
+                <option value="cancelled">ملغي</option>
+            </select>
+            @error('status') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="mb-4">
+            <label>الأولوية</label>
+            <select wire:model="priority" class="w-full border p-2 rounded">
+                <option value="low">منخفضة</option>
+                <option value="medium">متوسطة</option>
+                <option value="high">مرتفعة</option>
+            </select>
+            @error('priority') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="mb-4">
+            <label>المجموعة المسؤولة</label>
+            <select wire:model="group_id" class="w-full border p-2 rounded">
+                <option value="">اختر مجموعة</option>
+                @foreach($groups as $group)
+                    <option value="{{ $group->id }}">{{ $group->name }}</option>
+                @endforeach
+            </select>
+            @error('group_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+        </div>
+
+        <button type="submit"  class="bg-blue-500 text-white px-4 py-2 rounded">
+            {{ $project ? 'تحديث' : 'إنشاء' }}
+        </button>
+         @if ($isEdit)
+                <button type="button" wire:click="resetForm"
+                    class="bg-gray-300 text-black px-6 py-3 rounded-lg transition duration-200 w-full md:w-auto">
+                    إلغاء التعديل
+                </button>
+            @endif
+    </form>
+</div>
+
+</div>
+....create-project
+@extends('layouts.admin')
+@section('admin-content')
+@livewire('admin.project.project-form')
+@endsection
+
+....edit-projec
+@extends('layouts.admin')
+@section('admin-content')
+<div class="max-w-3xl mx-auto bg-white p-6 rounded shadow">
+    <h2 class="text-xl font-semibold mb-4">تعديل المشروع</h2>
+</div>
+@livewire('project.project-form', ['project' => $project])
+@endsection
+
+App\Livewire\Project;
+use Livewire\Component;
+use App\Models\Project;
+use App\Models\Group;
+
+class ProjectForm extends Component
+{
+    public $project;
+    public $name;
+    public $isEdit = false, $project_id = null;
+
+    public $description;
+    public $start_date;
+    public $end_date;
+    public $status = 'pending';
+    public $priority = 'low';
+    public $group_id;
+
+    public $groups;
+
+    public function mount($project_id = null )
+    {
+        $this->groups = Group::all();
+        $this->project = Project::all();
+        if ($project_id) {
+            $this->isEdit = true;
+            $this->name = $this->project->name;
+            $this->description = $this->project->description;
+            $this->start_date = $this->project->start_date;
+            $this->end_date = $this->project->end_date;
+            $this->status = $this->project->status;
+            $this->priority = $this->project->priority;
+            $this->group_id = $this->project->group_id;
+        }
+    }
+
+    public function save()
+    {
+        $this->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'status' => 'required|in:pending,in_progress,completed,cancelled',
+            'priority' => 'required|in:low,medium,high',
+            'group_id' => 'required|exists:groups,id',
+        ]);
+
+        $data = $this->only([
+            'name', 'description', 'start_date', 'end_date', 'status', 'priority', 'group_id'
+        ]);
+
+        if ($this->isEdit) {
+            $project =Group::findOrFail($this->project_id);
+            $this->project->update($data);
+            session()->flash('success', 'تم تحديث المشروع بنجاح');
+        } else {
+            Project::create($data);
+            session()->flash('success', 'تم إنشاء المشروع بنجاح');
+            $this->resetExcept('groups');
+        }
+    }
+
+    function resetForm(){
+        $this->reset(['name', 'description', 'start_date', 'end_date', 'status', 'priority', 'group_id']);
+        $this->isEdit = false;
+        $this->project_id = null;
+        return redirect()->back();
+    }
+    public function render()
+    {
+        return view('livewire.admin.project.project-form');
+    }
+}
+
+App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Project;
+
+class ProjectController extends Controller
+{
+    public $project;
+     public function index(){
+        $project = Project::with('leader')->paginate(10);
+        return view('livewire.admin.groups.admin-index',compact('project'));
+     }
+      public function create(){
+       return  view('livewire.admin.project.create-project');
+    }
+     public function show($id)
+    {
+        $this->project = Project::with('group', 'tasks')->findOrFail($id);
+        return view('livewire.admin.project.show-project', ['project' => $this->project]);
+    }
+    public function destroy(Project $project)
+        {
+            $project->delete();
+
+            return redirect()->route('admin.projects.index')->with('success', 'تم حذف المشروع بنجاح.');
+        }
+
+}
+
+    Route::get('/projects/create',  [ProjectController::class, 'create'])->name('projects.create');
+
+    1............/projects/create عند زيارة
+Undefined variable $isEdit
