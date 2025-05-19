@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class UserTableSeeder extends Seeder
+class UserSeeder1 extends Seeder
 {
     
     

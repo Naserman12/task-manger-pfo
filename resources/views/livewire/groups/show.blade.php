@@ -14,7 +14,7 @@
             <div class="flex space-x-4 space-x-reverse">
                 <a href="{{ route('groups.edit', $group->id) }}"
                    class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg">
-                   تعديل
+                   تعديل 📝
                 </a>
                 @livewire('delete-group', ['groupId' => $group->id], key('delete-'.$group->id))
             </div>

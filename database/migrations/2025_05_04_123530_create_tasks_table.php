@@ -12,16 +12,30 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
-        $table->id();    
-        $table->string('title');
-        $table->text('description');
-        $table->enum('status', ['pending', 'accepted', 'in_progress', 'under_review', 'completed'])->default('pending');
-        $table->date('due_date');
-        $table->boolean('is_public')->default(false);
-        $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
-        $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
-        $table->timestamps();
+            $table->id();
+            $table->string('title');
+            $table->text('description')->nullable();
+
+            $table->foreignId('group_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('project_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('assigned_to')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
+
+            $table->enum('status', [
+                'available',
+                'pending',
+                'in_progress',
+                'under_review',
+                'needs_revision',
+                'completed',
+                'rejected',
+            ])->default('pending');
+
+            $table->timestamp('starts_at')->nullable();
+            $table->timestamp('due_at')->nullable(); // تاريخ التسليم
+            $table->timestamps();
         });
+
     }
 
     /**

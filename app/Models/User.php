@@ -24,6 +24,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'username',
+        'phone',
         'email',
         'password',
     ];
@@ -37,6 +38,15 @@ class User extends Authenticatable
                 ->withPivot('role', 'assigned_at')
                 ->withTimestamps();
     }
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'created_by');
+    }
+    public function sharedProjects()
+    {
+        return $this->belongsToMany(Project::class, 'project_user');
+    }
+
     public function leader(){
         return $this->belongsTo(User::class, 'leader_id');
     }

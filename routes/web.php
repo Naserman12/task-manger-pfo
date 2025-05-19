@@ -19,14 +19,18 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Livewire\Admin\Project\ProjectForm;
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', Home::class)->name('admin.dashboard');
-    // Route::get('/groups', GroupsIndex::class)->name('admin.groups');
     Route::get('/groups/{id}/edit', [AdminGroupController::class, 'edit'])->name('admin.groups.edit'); 
     Route::delete('/groups/{id}', [AdminGroupController::class, 'destroy'])->name('admin.groups.delete'); 
     Route::get('/tasks', TasksIndex::class)->name('admin.tasks');
     Route::get('/users', [UserController::class, 'index'])->name('admin.users');
-    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
-    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('admin.users.delete');
-    // Route::get('/reports', ReportsIndex::class)->name('admin.reports');
+    Route::get('/users/{id}', [UserController::class, 'show'])->name('show-profile');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::patch('/admin/users/{user}/role', [UserController::class, 'updateRole'])->name('admin.users.updateRole');
+
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+    // Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('admin.users.delete');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+
     Route::get('/reports', function () {
         return view('livewire.admin.reports.reportsIndex');
     })->name('admin.reports');
@@ -56,17 +60,21 @@ Route::get('/create/test', function () {
     return view('livewire.admin.project.create-project');
 });
 
-
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GroupMemberController;
 use App\Http\Controllers\NotificationController;
-
 use App\Livewire\Groups\GroupForm;
 use App\Models\Group;
 use PHPUnit\TextUI\Configuration\GroupCollection;
 use App\Livewire\ShowAllNotifications;
 use App\Livewire\ShowNotification;
 use App\Models\Project;
+use App\Http\Controllers\Task\TaskController as TaskController2;
+
+    Route::get('/groups/{group}/projects/{project}/tasks/create', [TaskController2::class, 'create'])
+        ->name('tasks.create');
+    Route::get('/tasks/{id}', [TaskController2::class, 'show'])->name('tasks.show');
+    Route::get('/tasks', [TaskController2::class, 'index'])->name('tasks.index-tasks');
 
 // Main Routes
 Route::view('/', 'welcome-page')->name('/');
@@ -96,21 +104,47 @@ Route::middleware([
     
     // Group Member  
     Route::get('/groups/{group}/respond', [GroupMemberController::class, 'respond'])->name('group-members.respond');
-
     // Groups
     Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
-    Route::get('/project/create',  [ProjectController::class, 'create'])->name('projects.create');
-    
+    Route::get('/project/create',  [ProjectController::class, 'create'])->name('projects.create');  
     Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create');
     Route::get('/groups/{group}/edit', [GroupController::class, 'edit'])->name('groups.edit');
     Route::get('/groups/{group}', [GroupController::class, 'show'])->name('groups.show');
     Route::get('/groups/{group}/delete', function (Group $group){
         return view('/livewire/groups/delete-group', ['group' => $group]);
     })->name('groups.delete');
-    // Dashboard
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard');
-    // })->name('dashboard');
     Route::get('/dashboard', Home::class)->name('dashboard');
-
 });
+
+
+
+
+use App\Http\Controllers\Auth\VerifyEmailController;
+use Livewire\Volt\Volt;
+Route::middleware('guest')->group(function () {
+    Volt::route('register', 'pages.auth.register')
+        ->name('register');
+    Volt::route('login', 'pages.auth.login')
+        ->name('login');
+    Volt::route('forgot-password', 'pages.auth.forgot-password')
+        ->name('password.request');
+    Volt::route('reset-password/{token}', 'pages.auth.reset-password')
+        ->name('password.reset');
+});
+Route::middleware('auth')->group(function () {
+    Volt::route('verify-email', 'pages.auth.verify-email')
+        ->name('verification.notice');
+
+    // Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
+    //     ->middleware(['signed', 'throttle:6,1'])
+    //     ->name('verification.verify');
+
+    Volt::route('confirm-password', 'pages.auth.confirm-password')
+        ->name('password.confirm');
+});
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/user/profile', [\Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController::class, 'show'])
+        ->name('profile.show');
+});
+
+

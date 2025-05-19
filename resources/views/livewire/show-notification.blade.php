@@ -8,7 +8,7 @@
     <div class="p-4 bg-white shadow rounded mb-4">
         <h2 class="text-lg font-bold mb-2">نوع الإشعار: {{ $type }}</h2>
         @if ($type === 'GroupInvitationNotification')
-            <p><strong>المرسل:</strong> {{ $details['inviter'] ?? 'غير معروف' }}</p>
+            <p><strong>المرسل:</strong> {{ $details['inviter_name'] ?? 'غير معروف' }}</p>
             <p><strong>الرسالة:</strong> {{ $details['message'] ?? 'لا توجد رسالة' }}</p>
             <p><strong>Id:</strong> {{ $details['group_id'] ?? 'لا توجد رسالة' }}</p>
              @if ($userGroup && $userGroup->pivot->status === 'pending')

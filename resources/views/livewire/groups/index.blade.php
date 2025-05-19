@@ -38,7 +38,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" >{{ $leader->name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-medium" >
                     <a href="{{route('groups.edit', $group->id)}}" class="text-yellow-500 hover:text-yellow-900 px-3 py-1 rounded">
-                        تعديل </a>
+                         📝تعديل </a>
                     </td>
                     <td>
                         <a href="{{ route('groups.show', $group->id) }}" 

@@ -24,10 +24,14 @@ class Group extends Model
                     ->withPivot('role', 'status', 'invited_by', 'token', 'invited_at','responded_at', 'joined_at')
                     ->withTimestamps();
     }
+    
     function leader(){
         return $this->belongsTo(User::class, 'leader_id');
     }
     public function pendingInvitations(){
         return $this->hasMany(Invitation::class)->where('status', 'pending');
     }
+    public function getRouteKeyName(){
+       return 'id';
+  }
 }

@@ -44,7 +44,6 @@
     </select>
     @error('status') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 </div>
-
 <div class="mb-4">
     <label>الأولوية</label>
     <select wire:model="priority" class="w-full border p-2 rounded">
@@ -54,8 +53,6 @@
     </select>
     @error('priority') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 </div>
-
-
         <div class="mb-4">
             <label>المجموعة المسؤولة</label>
             <select wire:model="group_id" class="w-full border p-2 rounded">

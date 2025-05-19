@@ -33,7 +33,7 @@ class GroupForm extends Component
         $this->leader_id = $group->leader_id;
      }
     function saveGroup(){
-        $this->validate();
+       $validated = $this->validate();
         try {
             Log::debug('Data befor  save: ',[
                 'isEdit' => $this->isEdit,
@@ -45,15 +45,26 @@ class GroupForm extends Component
                 $group = Group::findOrFail($this->group_id);
                 $group->update([ 'name' => $this->name, 'leader_id' => $this->leader_id]);
                     $group->notify(  new GroupNotification(
-                        $this->group, 
-                        '', 
-                        Auth::user()
+                        $this->group,  
+                        Auth::user(),
+                        '',
                     ));
-                session()->flash('success', 'تم تحديث المجموعة بنجاح');
+                session()->flash('message', 'تم تحديث المجموعة بنجاح');
                 $this->resetForm();         
             }else{ 
-                Group::create(['name' => $this->name, 'leader_id' => $this->leader_id]);  
-                session()->flash('success', ' تم إنشاء المجموعة بنجاح');
+               $group =  Group::create($validated);  
+                   // إضافة المشرف كعضو تلقائي في المجموعة مع تفاصيل إضافية في pivot
+                $group->members()->attach($validated['leader_id'], [
+                    'role' => 'sub_leader',
+                    'status' => 'accepted', // أو 'active'
+                    'invited_by' => $validated['leader_id'],
+                    'token' => null,
+                    'invited_at' => now(),
+                    'responded_at' => now(),
+                    'joined_at' => now(),
+                ]);
+
+                session()->flash('message', ' تم إنشاء المجموعة بنجاح');
                 $this->resetForm();         
             }
             // return redirect()->to(''); 
@@ -64,7 +75,6 @@ class GroupForm extends Component
         }
         $this->reset(['name', 'leader_id']);
         $this->groups = Group::all();
-        
     }
     public function resetForm(){
         $this->reset(['name', 'leader_id']);

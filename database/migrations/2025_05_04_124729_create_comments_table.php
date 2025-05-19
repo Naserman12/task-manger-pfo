@@ -16,6 +16,13 @@ return new class extends Migration
             $table->text('content');
             $table->foreignId('task_id')->constrained();
             $table->foreignId('user_id')->constrained();
+             $table->unsignedTinyInteger('rating')->nullable(); // تقييم من 1 إلى 5 (اختياري)
+
+            $table->enum('type', [
+                'general',   // تعليق عادي
+                'completed', // تقييم بعد إكمال
+                'rejected'   // ملاحظة عند الرفض
+            ])->default('general');
             $table->timestamps();
         });
     }

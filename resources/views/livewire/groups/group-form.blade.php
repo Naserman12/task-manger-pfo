@@ -66,7 +66,7 @@
                             @if (!$isEdit)
                                 <td class="py-2 px-4 text-center">
                                     <a href="{{ route('groups.edit', $group->id) }}"
-                                        class="text-blue-500 hover:text-blue-700">تعديل</a>
+                                        class="text-blue-500 hover:text-blue-700">تعديل 📝</a>
                                 </td>
                             @endif
                         </tr>

@@ -20,6 +20,10 @@ class Project extends Model
 {
     return $this->belongsTo(Group::class);
 }
+public function participants()
+{
+    return $this->belongsToMany(User::class, 'project_user');
+}
 
 public function creator()
 {
@@ -29,6 +33,9 @@ public function tasks()
 {
     return $this->hasMany(Task::class);
 }
+  public function getRouteKeyName(){
+       return 'id';
+  }
 
 
 }
