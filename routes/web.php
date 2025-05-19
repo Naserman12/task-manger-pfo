@@ -74,6 +74,9 @@ use App\Http\Controllers\Task\TaskController as TaskController2;
     Route::get('/groups/{group}/projects/{project}/tasks/create', [TaskController2::class, 'create'])
         ->name('tasks.create');
     Route::get('/tasks/{id}', [TaskController2::class, 'show'])->name('tasks.show');
+    Route::put('/tasks/{id}', [TaskController2::class, 'update'])->name('tasks.update');
+    Route::get('/tasks/{id}/edit', [TaskController2::class, 'edit'])->name('tasks.edit');
+    Route::delete('/tasks/{id}', [TaskController2::class, 'destroy'])->name('tasks.destroy');
     Route::get('/tasks', [TaskController2::class, 'index'])->name('tasks.index-tasks');
 
 // Main Routes

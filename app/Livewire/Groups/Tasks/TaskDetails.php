@@ -10,13 +10,11 @@ use App\Livewire\Groups\Tasks\Log;
 use Illuminate\Support\Facades\Auth;
 class TaskDetails extends Component
 {
-    public Task $task;
+    public  $task;
     public $newComment = '', $editCommentId = null, $editCommentContent = '', $latestCommentId;
     public $isAssignedUser;
     public $isCreator;
     public $comments ;
-
-
     public function mount(Task $task)
     {
         $this->task = $task;
@@ -24,6 +22,7 @@ class TaskDetails extends Component
         $this->isAssignedUser = $task->assignee_to === Auth::id();
         $this->isCreator = $task->created_by === Auth::id();
     }
+
     public function addComment()
     {
         $this->validate([

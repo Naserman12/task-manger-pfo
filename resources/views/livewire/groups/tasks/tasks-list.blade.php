@@ -46,8 +46,17 @@
                 </p>
 
                 <div class="flex gap-3">
-                    <button wire:click="$emit('ShowTaskDetails', {{ $task->id }})" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">عرض التفاصيل</button>
+                    <button onclick="window.location='{{ route('tasks.show', $task->id)}}'" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">عرض التفاصيل</button>
                     {{-- أزرار تعديل الحالة حسب الصلاحيات والحالة --}}
+                    @if (auth()->user()->role === 'sub_leader' || auth()->user()->role === 'admin')
+                    <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" onsubmit="return confirm('هل أنت متأكد من حذف هذه المهمة؟');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
+                            🗑️ حذف
+                        </button>
+                    </form>     
+                    @endif
                 </div>
             </div>
         @empty

@@ -65,8 +65,8 @@
                 <x-nav-link :href="route('admin.projects.index')" :active="request()->routeIs('admin.projects.index')" class="mr-1">
                     {{ __('عرض المشاريع') }}
                 </x-nav-link>
-                <x-nav-link :href="route('admin.projects.index')" :active="request()->routeIs('admin.projects.index')" class="mr-1">
-                    {{ __('عرض المشاريع') }}
+                <x-nav-link :href="route('tasks.index-tasks')" :active="request()->routeIs('tasks.index-tasks')" class="mr-1">
+                    {{ __('عرض المهام') }}
                 </x-nav-link>
             </div>
             
