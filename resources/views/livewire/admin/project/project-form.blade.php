@@ -1,9 +1,7 @@
 <div>
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
     <div class="max-w-2xl mx-auto p-6 bg-white rounded shadow">
-        <h1>is edit : {{ $isEdit }}</h1>
-    <h2 class="text-lg font-semibold mb-4">
-
+    <h2 class="bg-blue-500 text-white px-4 py-2  rounded-lg transition duration-200">
         {{ $isEdit ? 'تعديل المشروع' :   'إنشاء مشروع جديد'  }}
     </h2>
 

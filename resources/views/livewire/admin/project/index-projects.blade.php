@@ -1,6 +1,6 @@
 <div class="container mx-auto px-4">
     <h1 class="text-2xl font-bold mb-6 text-right">المشاريع</h1>
-
+    <a href="{{ route('projects.create') }}" class="bg-blue-500 text-white px-4 py-2  rounded-lg transition duration-200">إنشاء مشروع</a>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse ($projects as $project)
             <div class="bg-white rounded-lg shadow p-4 flex flex-col justify-between hover:shadow-md transition duration-300">

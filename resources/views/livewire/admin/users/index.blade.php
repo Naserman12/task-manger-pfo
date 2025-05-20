@@ -10,7 +10,6 @@
     @endif
     {{-- العنوان العام --}}
     <h2 class="text-2xl font-bold text-gray-800">👥 عرض المستخدمين</h2>
-
     {{-- البحث والفلترة --}}
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <input type="text" placeholder="🔍 بحث بالاسم/البريد..." class="w-full md:w-1/3 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300">
@@ -32,15 +31,15 @@
                         @else border-red-500 @endif">
                 <div>
                     <p class="font-semibold">{{ $user->name }} <span class="text-sm text-gray-500">({{ $user->role }})</span></p>
+                    @if (auth()->user()->role === 'admin')       
                     <p class="text-sm text-gray-600">{{ $user->email }}</p>
+                    @endif
                 </div>
                 <a href="{{ route('admin.users.edit', $user->id) }}" class="text-blue-600 text-sm">تعديل</a>
             </div>
         @endforeach
-
         <div class="text-center text-gray-500">عرض الكل ({{ count($users) }})</div>
     </div>
-
     {{-- للحاسوب: جدول مفصل --}}
     <div class="hidden md:block">
         <table class="min-w-full bg-white shadow-md rounded-md overflow-hidden border border-gray-200">
@@ -48,6 +47,9 @@
                 <tr>
                     <th class="px-4 py-2 text-right">الصورة</th>
                     <th class="px-4 py-2 text-right">الاسم</th>
+                    @if (auth()->user()->role === 'admin')
+                        
+                    @endif
                     <th class="px-4 py-2 text-right">البريد الإلكتروني</th>
                     <th class="px-4 py-2 text-right">الدور</th>
                     <th class="px-4 py-2 text-right">الإجراءات</th>
@@ -58,7 +60,9 @@
                     <tr class="border-t">
                         <td class="px-4 py-2 text-center">👤</td>
                         <td class="px-4 py-2">{{ $user->name }}</td>
+                        @if (auth()->user()->role  === 'admin')
                         <td class="px-4 py-2">{{ $user->email }}</td>
+                        @endif
                         <td class="px-4 py-2">{{ $user->role }}</td>
                         <td class="px-4 py-2 space-x-2">
                             <a href="{{ route('show-profile', $user->id) }}" class="text-blue-600 hover:underline">عرض  المستخدم</a>

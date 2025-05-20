@@ -7,7 +7,6 @@
     <form method="POST" action="{{ route('admin.users.update', $user->id) }}" enctype="multipart/form-data" class="space-y-6">
         @csrf
         @method('PUT')
-
         {{-- الاسم --}}
         <div>
             <label class="block mb-2 font-medium">👤 الاسم الكامل</label>
@@ -23,17 +22,18 @@
 
         {{-- البريد الإلكتروني --}}
         <div>
+            @if (auth()->user()->role === 'admin')   
             <label class="block mb-2 font-medium">📧 البريد الإلكتروني</label>
             <input type="email" name="email" value="{{ old('email', $user->email) }}" required
-                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200">
+            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200">
         </div>
+        @endif
         {{-- رقم الهاتف --}}
         <div>
             <label class="block mb-2 font-medium">📞 رقم الهاتف</label>
             <input type="text" name="phone" value="{{ old('phone', $user->phone) }}"
                 class="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200">
         </div>
-
         {{-- الدور (مقفل إذا كان المستخدم نفسه) --}}
         @if(auth()->user()->role === 'admin')
         <div>

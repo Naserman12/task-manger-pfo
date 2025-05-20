@@ -6,7 +6,7 @@
 @else
   @section('admin-content')
 <div class="text-center bg-yellow-100 border border-yellow-400 text-yellow-800 p-4 rounded">
-                ⚠️ لا  يمكنك الوصول للصفحة .
+  ⚠️ لا  يمكنك الوصول للصفحة .
 </div>
 @endsection
 @endif
