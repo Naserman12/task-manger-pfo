@@ -47,10 +47,9 @@
                 <tr>
                     <th class="px-4 py-2 text-right">الصورة</th>
                     <th class="px-4 py-2 text-right">الاسم</th>
-                    @if (auth()->user()->role === 'admin')
-                        
-                    @endif
+                    @if (auth()->user()->role === 'admin')      
                     <th class="px-4 py-2 text-right">البريد الإلكتروني</th>
+                    @endif
                     <th class="px-4 py-2 text-right">الدور</th>
                     <th class="px-4 py-2 text-right">الإجراءات</th>
                 </tr>
