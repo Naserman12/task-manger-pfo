@@ -1,4 +1,4 @@
-@if (Auth()->user()->role === 'admin' || auth()->user()->role === 'team_leader' || auth()->user()->name === 'Abo Shakir')
+@if (Auth()->user()->role === 'admin' || auth()->user()->role === 'team_leader')
 @extends('layouts.admin')
 @section('admin-content')
 @livewire('groups.group-form' )
