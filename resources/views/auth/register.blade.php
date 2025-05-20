@@ -1,14 +1,10 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
-
-        <x-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('register') }}" dir="rtl">
-            @csrf
-
+@extends('layouts.app')
+@section('content')
+<div>
+    
+    <form method="POST" action="{{ route('register') }}" dir="rtl">
+        @csrf
+        
             <div>
                 <x-label for="name" value="الاسم الكامل" />
                 <x-input id="name" class="block mt-1 w-full text-right" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
@@ -33,7 +29,6 @@
                 <x-label for="password_confirmation" value="تأكيد كلمة المرور" />
                 <x-input id="password_confirmation" class="block mt-1 w-full text-right" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
-
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4 text-right">
                     <x-label for="terms">
@@ -60,5 +55,6 @@
                 </x-button>
             </div>
         </form>
-    </x-authentication-card>
-</x-guest-layout>
+    </div>
+@endsection 
+

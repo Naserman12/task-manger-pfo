@@ -25,7 +25,9 @@
         <!-- محتوى النافبار هنا -->
         <div class="max-w-7xl mx-auto px-4 py-3  z-[999] flex flex-row-reverse items-center justify-between relative">
             <!-- شعار النظام -->
-            <div class="text-2xl font-bold"> إدارة المهام</div>
+             <a href="{{ route('/') }}" class=" hover:bg-orange-100">
+                 <div class="text-2xl font-bold"> إدارة المهام</div>
+             </a>
 
             <!-- روابط -->
             @auth
@@ -56,7 +58,7 @@
                 </div>    
             </div>
             <div class="text-zinc-200 hidden  sm:flex ">
-                <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" class="mr-4">
+                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="mr-4">
                     {{ __('لوحة التحكم') }}
                 </x-nav-link>
                 <x-nav-link :href="route('admin.groups')" :active="request()->routeIs('admin.groups')" class="mr-1">

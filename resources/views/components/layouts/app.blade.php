@@ -37,7 +37,7 @@
         <div class="text-2xl font-bold mb-8 text-center">لوحة التحكم</div>
         <nav class="flex-1">
             <ul class="space-y-2">
-                <li><a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 hover:bg-gray-700 rounded">الصفحة الرئيسية</a></li>
+                <li><a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:bg-gray-700 rounded">الصفحة الرئيسية</a></li>
                 <li><a href="{{ route('admin.groups') }}" class="block px-4 py-2 hover:bg-gray-700 rounded">المجموعات</a></li>
                 <li><a href="{{ route('admin.projects.index') }}" class="block px-4 py-2 hover:bg-gray-700 rounded">المشاريع</a></li>
                 <li><a href="{{ route('admin.users') }}" class="block px-4 py-2 hover:bg-gray-700 rounded">المستخدمين</a></li>
@@ -47,7 +47,7 @@
             </ul>
         </nav>
         <div class="mt-auto">
-            <a href="#" class="block px-4 py-2 hover:bg-red-700 bg-red-600 rounded text-center">تسجيل الخروج</a>
+            <a href="{{ route('logout') }}" class="block px-4 py-2 hover:bg-red-700 bg-red-600 rounded text-center">تسجيل الخروج</a>
         </div>
     </aside>
     <!-- Main content with padding to avoid overlapping sidebar -->

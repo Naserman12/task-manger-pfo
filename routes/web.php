@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Livewire\Dashboard\Home;
 use App\Livewire\Groups\Index as GroupsIndex;
 use App\Livewire\Tasks\Index as TasksIndex;
@@ -17,8 +18,10 @@ use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\ReportsController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Livewire\Admin\Project\ProjectForm;
+Route::get('/dashboard', function (){
+    return view('livewire.admin.dashboard.show-home');
+})->name('dashboard');
 Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', Home::class)->name('admin.dashboard');
     Route::get('/groups/{id}/edit', [AdminGroupController::class, 'edit'])->name('admin.groups.edit'); 
     Route::delete('/groups/{id}', [AdminGroupController::class, 'destroy'])->name('admin.groups.delete'); 
     Route::get('/tasks', TasksIndex::class)->name('admin.tasks');
@@ -34,9 +37,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/reports', function () {
         return view('livewire.admin.reports.reportsIndex');
     })->name('admin.reports');
-    Route::get('/dashboard', function () {
-    return view('livewire.admin.dashboard.show-home');
-    })->name('admin.dashboard');
     Route::get('/groups', function () {
     return view('livewire.admin.groups.show-admin-groups');
     })->name('admin.groups');
@@ -92,8 +92,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
-    
+])->group(function () {  
     // Notifications 
     Route::get('/notifications/{id}', function ($id) {
         return view('notifications.show-notification', ['notificationId' => $id]);
@@ -107,7 +106,6 @@ Route::middleware([
     ->name('group.invite.accept');
     Route::post('/notifications/{notification}/reject', [NotificationController::class, 'reject'])
     ->name('group.invite.reject');
-    
     // Group Member  
     Route::get('/groups/{group}/respond', [GroupMemberController::class, 'respond'])->name('group-members.respond');
     // Groups
@@ -119,7 +117,7 @@ Route::middleware([
     Route::get('/groups/{group}/delete', function (Group $group){
         return view('/livewire/groups/delete-group', ['group' => $group]);
     })->name('groups.delete');
-    Route::get('/dashboard', Home::class)->name('dashboard');
+    // Route::get('/admin/dashboard', Home::class)->name('dashboard');
 });
 
 
@@ -137,6 +135,14 @@ Route::middleware('guest')->group(function () {
     Volt::route('reset-password/{token}', 'pages.auth.reset-password')
         ->name('password.reset');
 });
+Route::get('/logout', function () {
+    Auth::logout();
+    session()->invalidate();
+    session()->regenerateToken();
+    return redirect('/'); // أو أي صفحة رئيسية ترغب بها
+})->name('logout');
+
+
 Route::middleware('auth')->group(function () {
     Volt::route('verify-email', 'pages.auth.verify-email')
         ->name('verification.notice');

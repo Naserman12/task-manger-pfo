@@ -40,7 +40,7 @@
             <label class="block mb-2 font-medium">🏢 الدور</label>
             <select name="role" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200">
                 <option value="user" @selected($user->role === 'user')>مستخدم</option>
-                <option value="manager" @selected($user->role === 'manager')>مدير مجموعة</option>
+                <option value="manager" @selected($user->role === 'team_leader')>مدير مجموعة</option>
                 <option value="admin" @selected($user->role === 'admin')>مدير عام</option>
             </select>
         </div>

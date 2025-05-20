@@ -1,22 +1,19 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <title>تسجيل الدخول</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    @vite('resources/css/app.css') {{-- لو كنت تستخدم Vite --}}
-</head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+@extends('layouts.admin')
+@section('admin-content')
 
-    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
-        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">تسجيل الدخول</h2>
-
+<div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">تسجيل الدخول</h2>
+    
+        @if (session('message'))
+            <div class="mb-4 text-green-600 text-sm">
+                {{ session('message') }}
+            </div>
+        @endif
         @if (session('error'))
             <div class="mb-4 text-red-600 text-sm">
                 {{ session('error') }}
             </div>
         @endif
-
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -49,5 +46,4 @@
         </div>
     </div>
 
-</body>
-</html>
+@endsection
