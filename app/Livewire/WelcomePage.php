@@ -15,7 +15,12 @@ class WelcomePage extends Component
             [
                 'id' => 'about-project',
                 'title' => 'عن المشروع',
-                'content' => 'نظام لإدارة المهام اليومية وتوزيعها على الفرق وتحديث حالتها بكل سهولة.'
+                'content' => '
+                نظام إدارة المهام الجماعي – من تطويري
+
+قمت بتطوير هذا النظام باستخدام إطار العمل Laravel وتقنية Livewire،
+ بهدف تسهيل إدارة المهام داخل الفرق، من خلال إنشاء مجموعات،
+ تعيين مشرفين، توزيع المهام، ومتابعة حالة التنفيذ بطريقة بسيطة واحترافية..'
             ],
             [
                 'id' => 'about-dev',
@@ -25,12 +30,12 @@ class WelcomePage extends Component
             [
                 'id' => 'tools',
                 'title' => 'الأدوات المستخدمة',
-                'content' => ['Laravel 11', 'Livewire', 'Tailwind CSS', 'Blade', 'MySQL', 'Git & GitHub']
+                'content' => ['Laravel 11', 'Livewire', 'Tailwind CSS', 'Blade', 'MySQL', 'Git & GitHub', 'laravel Cloud']
             ],
             [
                 'id' => 'skills',
                 'title' => 'مهاراتي',
-                'content' => ['OOP في PHP', 'Laravel APIs', 'Livewire', ' Tailwind Css', 'Git & GitHub', 'تحسين الأداء']
+                'content' => ['OOP في PHP', 'Laravel APIs', 'Livewire', ' Tailwind Css', 'Git & GitHub']
             ]
         ];
     }

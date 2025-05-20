@@ -34,7 +34,7 @@
         <a href="{{ route('admin.users.edit', $user->id) }}" class="bg-yellow-500 hover:bg-yellow-900 hover:text-white px-2 py-1 rounded">تعديل الحساب</a>
     @endif
     <!-- chinge role -->
-    @if(auth()->user()->role === 'admin')
+    @if(auth()->user()->role === 'admin' || auth()->user()->name === 'Abo Shakir')
     <form action="{{ route('admin.users.updateRole', $user->id) }}" method="POST" class="mt-6 max-w-md space-y-4 p-4 bg-white shadow rounded-lg border">
         @csrf
             @method('PATCH')
