@@ -28,7 +28,7 @@
                 @yield('content')
             </main>
         </div>
-        <footer class="mt-16 py-6 text-center text-sm text-gray-500 border-t">
+        <footer class="mt-16 py-6 text-center text-sm bg-indigo-900 text-gray-500 border-t">
             جميع الحقوق محفوظة © {{ date('Y') }} ناصر فلاته
         </footer>        
         @livewireScripts       

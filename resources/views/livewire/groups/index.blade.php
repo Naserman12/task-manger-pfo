@@ -6,7 +6,9 @@
         @if ($groups && $groups->count() > 0)   
         <div class="felx justify-between items-center bm-8">
             <h1 class="text-3xl font-bild mb-4 text-gray-800">قائمة المجموعات</h1>
+            @if (Auth()->user()->role === 'admin' || auth()->user()->role === 'team_leader')   
             <a href="{{ route('groups.create') }}" class="bg-blue-500 text-white px-4 py-2  rounded-lg transition duration-200">إنشاء مجموعة</a>
+            @endif
         </div>
     </div>
     <!-- الرسائل -->
@@ -15,7 +17,6 @@
          {{ session('success') }} 
     </div>    
     @endif
-   
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full divide-y divide-gray-200" >
             <thead class="bg-gray-50">
@@ -37,9 +38,12 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-medium text-gray-500" >{{$group->name}}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" >{{ $leader->name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-medium" >
-                    <a href="{{route('groups.edit', $group->id)}}" class="text-yellow-500 hover:text-yellow-900 px-3 py-1 rounded">
-                         📝تعديل </a>
-                    </td>
+                        @if (Auth()->user()->role === 'admin' || auth()->user()->role === 'team_leader')
+                            
+                        <a href="{{route('groups.edit', $group->id)}}" class="text-yellow-500 hover:text-yellow-900 px-3 py-1 rounded">
+                            📝تعديل </a>
+                        </td>
+                        @endif
                     <td>
                         <a href="{{ route('groups.show', $group->id) }}" 
                             class="text-blue-500 hover:text-blue-900 px-3 py-1 rounded">

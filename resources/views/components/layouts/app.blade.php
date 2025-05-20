@@ -52,7 +52,7 @@
     </aside>
     <!-- Main content with padding to avoid overlapping sidebar -->
     <main class="p-6 flex justify-center items-center min-h-screen md:block md:pr-64">
-        @yield('admin-content')
+        @yield('q-content')
     </main>
     </div>
     @livewireScripts

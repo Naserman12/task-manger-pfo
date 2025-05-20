@@ -3,9 +3,11 @@
         @if ($groups && $groups->count() > 0)
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8">
                 <h1 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-0 text-gray-800">📋 قائمة المجموعات</h1>
+                @if (auth()->user()->role === 'admin' || auth()->user()->role === 'team_leader' )
                 <a href="{{ route('groups.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-200 text-center">
                     ➕ إنشاء مجموعة
                 </a>
+                @endif
             </div>
 
             @if (session('success'))

@@ -12,11 +12,14 @@
         <div class="bg-blue-600 px-6 py-4 flex items-center justify-between">
             <h1 class="text-2xl font-bold text-white">تفاصيل المجموعة: {{ $group->name }}</h1>
             <div class="flex space-x-4 space-x-reverse">
+                @if (Auth()->user()->role === 'admin' || auth()->user()->role === 'team_leader')
+                    
                 <a href="{{ route('groups.edit', $group->id) }}"
-                   class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg">
-                   تعديل 📝
-                </a>
-                @livewire('delete-group', ['groupId' => $group->id], key('delete-'.$group->id))
+                class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg">
+                تعديل 📝
+            </a>
+            @livewire('delete-group', ['groupId' => $group->id], key('delete-'.$group->id))
+            @endif
             </div>
         </div>
     </div>   
@@ -52,7 +55,9 @@
         <div class="mt-10">
             <h2 class="text-xl font-semibold text-gray-800 mb-4">أعضاء المجموعة</h2>
             <div class="bg-white text-gray-800 p-6 rounded-lg shadow">
+                @if (Auth()->user()->role === 'admin' || auth()->user()->role === 'team_leader')   
                 @livewire('groups.group-members', ['groupId' => $group->id], key('member-'.$group->id))
+                @endif
             </div>
         </div>
 

@@ -29,9 +29,9 @@
                 <span class="text-red-600 font-bold">غير نشط</span>
             @endif
         </p>
-    </div>
+    </div><hr>
     @if(auth()->id() === $user->id)
-        <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-blue">تعديل الحساب</a>
+        <a href="{{ route('admin.users.edit', $user->id) }}" class="bg-yellow-500 hover:bg-yellow-900 hover:text-white px-2 py-1 rounded">تعديل الحساب</a>
     @endif
     <!-- chinge role -->
     @if(auth()->user()->role === 'admin')

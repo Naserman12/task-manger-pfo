@@ -48,7 +48,10 @@ Route::prefix('admin')->group(function () {
     }])->name('projects.edit');
     Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('admin.project.destroy');
     Route::get('/settings', SettingsIndex::class)->name('admin.settings');
-    Route::get('/projects', IndexProjects::class)->name('admin.projects.index');
+    // Route::get('/projects', IndexProjects::class)->name('admin.projects.index');
+    Route::get('/projects', function(){
+        return view('livewire.admin.project.show-index-projects');
+    })->name('admin.projects.index');
 });
 Route::get('/groups/editing', function(){
     view('livewire.groups.show-group-form');
