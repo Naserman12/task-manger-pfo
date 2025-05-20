@@ -12,10 +12,13 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <!-- Scripts -->
     </head>
-    <body class="font-sans items-center bg-gradient-to-r from-blue-300  ">
-          <main class=""> 
-                @yield('content')
-            </main>
+    <body class="font-sans bg-gradient-to-r from-blue-300  ">
+         @include('livewire.navbar')
+         <div class="mt-12">
+             <main > 
+                 @yield('content')
+                </main>
+            </div >
         <footer class="mt-16 py-6 text-center text-sm bg-indigo-900 text-gray-300 border-t">
             جميع الحقوق محفوظة © {{ date('Y') }} ناصر فلاته
         </footer>        

@@ -14,7 +14,7 @@
         </button>
     </div>
     <!-- مثال: إظهار/إخفاء النافبار -->
-    <nav x-show="showNavbar" class= " bg-gradient-to-l from-blue-900 to-indigo-400 text-white shadow-md fixed w-full z-50 transition-all duration-300"
+    <nav x-show="showNavbar" class= " bg-gradient-to-l from-blue-900 top-0 to-indigo-400 text-white shadow-md fixed w-full z-50 transition-all duration-300"
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 -translate-y-full"
         x-transition:enter-end="opacity-100 translate-y-0"
@@ -48,8 +48,8 @@
                 <div x-show="dropdownOpen" @click.away="dropdownOpen = false" x-transition
                 class="absolute right-0 mt-2 w-48 bg-gradient-to-l from-sky-950 to-teal-300 rounded-md shadow-lg z-50 py-2 text-right">
                 <a href="{{ route('/') }}#home" class="block px-4 py-2 hover:bg-blue-600">الرئيسية</a>
-                    <a href="{{ route('groups.index') }}#about-project" class="block px-4 py-2 hover:bg-blue-600">المجموعات</a>
-                    <a href="{{ route('/') }}#about-dev" class="block px-4 py-2 hover:bg-blue-600">عن المطور</a>
+                    <a href="{{ route('admin.groups') }}" class="block px-4 py-2 hover:bg-blue-600">المجموعات</a>
+                    <a href="{{ route('tasks.index-tasks') }}" class="block px-4 py-2 hover:bg-blue-600">عن المطور</a>
                     <a href="{{ route('/') }}#tools" class="block px-4 py-2 hover:bg-blue-600">الأدوات</a>
                     <a href="{{ route('/') }}#skills" class="block px-4 py-2 hover:bg-blue-600">المهارات</a>
                     @auth
