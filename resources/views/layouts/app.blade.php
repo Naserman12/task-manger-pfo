@@ -12,7 +12,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <!-- Scripts -->
     </head>
-    <body class="font-sans items-center  bg-blue-900 ">
+    <body class="font-sans items-center bg-gradient-to-r from-blue-300  ">
         @livewire('navbar')
           <main class=""> 
                 @yield('content')
