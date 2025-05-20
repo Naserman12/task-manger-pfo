@@ -13,7 +13,6 @@
         <!-- Scripts -->
     </head>
     <body class="font-sans items-center bg-gradient-to-r from-blue-300  ">
-        @livewire('navbar')
           <main class=""> 
                 @yield('content')
             </main>

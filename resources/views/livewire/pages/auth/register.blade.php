@@ -41,7 +41,7 @@ new #[Layout('layouts.guest')] class extends Component
 @extends('layouts.app')
 @section('content')
 <div>  
-    <div class="w-full bg-gradient-to-r from-blue-500 mt-12 max-w-md  bg-white  p-8 rounded-lg shadow-md">
+    <div class="w-full bg-gradient-to-r from-blue-500 mt-6 max-w-md  bg-white  p-8 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold bg-blue-900 text-center text-gray-800 mb-6">تسجيل جديد</h2>
     
         @if (session('message'))

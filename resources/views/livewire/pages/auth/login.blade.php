@@ -30,7 +30,7 @@ new #[Layout('layouts.guest')] class extends Component
     
 <div>
 
-<div class="w-full max-w-md bg-gradient-to-r from-blue-500 bg-white items-center mt-12 p-4 rounded-lg shadow-md">
+<div class="w-full max-w-md bg-gradient-to-r from-blue-500 bg-white items-center mt-8 p-4 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">تسجيل الدخول</h2>
     
         @if (session('message'))
