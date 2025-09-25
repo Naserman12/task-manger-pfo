@@ -17,8 +17,8 @@
          <div class="mt-12">
              <main > 
                  @yield('content')
-                </main>
-            </div >
+             </main>
+         </div >
         <footer class="mt-16 py-6 text-center text-sm bg-indigo-900 text-gray-300 border-t">
             جميع الحقوق محفوظة © {{ date('Y') }} ناصر فلاته
         </footer>        

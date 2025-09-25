@@ -17,6 +17,9 @@ return new class extends Migration
             $table->json('data');
             $table->morphs('notifiable');
             $table->timestamp('read_at')->nullable();
+
+           $table->foreignId('notification_type_id')->constrained()->cascadeOnDelete();
+           $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
         });
     }

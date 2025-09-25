@@ -58,7 +58,7 @@ class User extends Authenticatable
     }
     public function sendInvitations()
 {
-    return $this->hasMany(Invitation::class, 'inviter_id');
+    return $this->hasMany(Notification::class, 'inviter_id');
 }
 
 public function groupInvitations(){
